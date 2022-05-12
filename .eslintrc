@@ -1,0 +1,10 @@
+{
+  "root": true,
+  "extends": ["@asd14/eslint-config/targets/node-ts"],
+  "rules": {},
+  "settings": {
+    "import/cache": {
+      "lifetime": 5
+    }
+  }
+}

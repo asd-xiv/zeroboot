@@ -1,0 +1,95 @@
+{
+  "name": "zero",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "homepage": "https://github.com/andreidmt/zero",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreidmt/zero.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andreidmt/zero/issues"
+  },
+  "author": {
+    "name": "Andrei Dumitrescu",
+    "url": "https://github.com/andreidmt"
+  },
+  "bin": {
+    "zero": "bin/zero"
+  },
+  "directories": {
+    "lib": "dist"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "type": "module",
+  "exports": "./dist/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "----UTIL": "",
+    "prepare": "git config --local core.hooksPath .githooks",
+    "setup": "npm ci --also=dev",
+    "update": "ncu --interactive",
+    "postupdate": "npm audit fix",
+    "format": "prettier --write --prose-wrap=always .",
+    "codemods": "node -r swc-register src/core.codemods/index.ts",
+    "----LINT": "",
+    "lint.js": "eslint --quiet src",
+    "lint.md": "markdownlint '*.md' 'src/**/*.md'",
+    "lint": "npm run lint.js && npm run lint.md",
+    "typecheck": "tsc --pretty --noEmit",
+    "----TEST": "",
+    "test": "tape -r swc-register 'src/**/*.test.js' 'src/*.test.js' | tap-nirvana",
+    "tdd": "nodemon --watch src --exec 'npm test'",
+    "coverage": "c8 npm test && c8 report --reporter=text-lcov | coveralls",
+    "----BUILD": "",
+    "release": "semantic-release",
+    "----Dev": "",
+    "start": "node --loader ts-node/esm src/index.ts"
+  },
+  "dependencies": {
+    "@swc/helpers": "^0.3.13",
+    "async": "^3.2.3",
+    "chalk": "^5.0.1",
+    "cli-prompt": "^0.6.0",
+    "commander": "^9.2.0",
+    "consolidate": "^0.16.0",
+    "gray-matter": "^4.0.3",
+    "handlebars": "^4.7.7",
+    "inquirer": "^8.2.4",
+    "metalsmith": "^2.4.2",
+    "micromatch": "^4.0.5"
+  },
+  "devDependencies": {
+    "@asd14/eslint-config": "^7.3.0",
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.182",
+    "@types/async": "^3.2.13",
+    "@types/consolidate": "^0.14.1",
+    "@types/inquirer": "^8.2.1",
+    "@types/metalsmith": "^2.3.1",
+    "c8": "^7.11.2",
+    "eslint": "^8.15.0",
+    "lint-staged": "^12.4.1",
+    "markdownlint-cli": "^0.31.1",
+    "npm-check-updates": "^12.5.11",
+    "prettier": "^2.6.2",
+    "semantic-release": "^19.0.2",
+    "tap-nirvana": "^1.1.0",
+    "tape": "^5.5.3",
+    "toml": "^3.0.0",
+    "ts-node": "^10.7.0"
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
+  }
+}

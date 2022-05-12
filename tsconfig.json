@@ -1,0 +1,15 @@
+{
+  "include": ["src"],
+  "exclude": ["**/node_modules"],
+  "compilerOptions": {
+    "module": "esnext",
+    "baseUrl": "src",
+    "sourceMap": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "types": ["node"]
+  }
+}
