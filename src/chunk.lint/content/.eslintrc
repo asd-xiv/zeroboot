@@ -1,0 +1,13 @@
+{
+  "extends": ["@asd14/eslint-config/targets/react-ts"],
+  "root": true,
+  "rules": {
+  },
+
+  "settings": {
+    // Recommended if you use eslint_d
+    "import/cache": {
+      "lifetime": 5
+    }
+  }
+}
