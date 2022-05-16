@@ -43,7 +43,7 @@ executors:
 jobs:
   detect-secrets:
     executor: gitleaks
-    working_directory: &JOB_WORKING_DIR "~/{{ name }}"
+    working_directory: &JOB_WORKING_DIR "~/{{ zero_package-name }}"
     steps:
       - checkout
       - run:
@@ -59,8 +59,7 @@ jobs:
       - restore_cache:
           name: '[circleci] Restore cached "node_modules" folder'
           keys:
-            - &CACHE_KEY_NODE_MODULES '{{ name }}-v1-{{ arch }}-{{ checksum
-              "package-lock.json" }}'
+            - &CACHE_KEY_NODE_MODULES '{{ zero_package-name }}-v1-{{ arch }}-{{ checksum "package-lock.json" }}'
       - run:
           name: "[bash] Prepare auth token for R/W GitHub private NPM packages"
           command: |
@@ -76,7 +75,7 @@ jobs:
       - persist_to_workspace:
           root: &WORKSPACE_ROOT "~/"
           paths:
-            - {{ name }}
+            - {{ zero_package-name }}
             - .npmrc
 
   test:
@@ -172,9 +171,9 @@ workflows:
           requires:
             - test
           context:
-            - "{{ name }} - CodeClimate"
+            - "{{ zero_package-name }} - CodeClimate"
       - release-npm:
           requires:
             - test
           context:
-            - "{{ name }} - GitHub"
+            - "{{ zero_package-name }} - GitHub"

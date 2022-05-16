@@ -53,16 +53,20 @@
   },
   "dependencies": {
     "@swc/helpers": "^0.3.13",
+    "@types/glob": "^7.2.0",
+    "@types/inquirer": "^8.2.1",
     "async": "^3.2.3",
     "chalk": "^5.0.1",
     "cli-prompt": "^0.6.0",
     "commander": "^9.2.0",
     "consolidate": "^0.16.0",
+    "glob": "^8.0.3",
     "gray-matter": "^4.0.3",
     "handlebars": "^4.7.7",
     "inquirer": "^8.2.4",
     "metalsmith": "^2.4.2",
-    "micromatch": "^4.0.5"
+    "micromatch": "^4.0.5",
+    "rambda": "^7.1.4"
   },
   "devDependencies": {
     "@asd14/eslint-config": "^7.3.0",
@@ -74,7 +78,6 @@
     "@swc/core": "^1.2.182",
     "@types/async": "^3.2.13",
     "@types/consolidate": "^0.14.1",
-    "@types/inquirer": "^8.2.1",
     "@types/metalsmith": "^2.3.1",
     "c8": "^7.11.2",
     "eslint": "^8.15.0",

@@ -1,9 +1,9 @@
 export type Template = {
   name: string
   init: {
-    features: {
+    chunks: {
       required: string[]
-      ask: string[]
+      optional: string[]
     }
   }
 }

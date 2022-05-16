@@ -3,9 +3,9 @@ import { Template } from "./core.types/template"
 export default {
   name: "Node API",
   init: {
-    features: {
-      required: ["base", "node"],
-      ask: ["ci", "githooks", "lint", "test", "typescript"],
+    chunks: {
+      required: ["base", "node", "api"],
+      optional: ["ci", "lint", "test", "typescript"],
     },
   },
 } as Template

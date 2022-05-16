@@ -1,11 +1,11 @@
 import { Template } from "./core.types/template"
 
 export default {
-  name: "React Single Page Application",
+  name: "React Application",
   init: {
-    features: {
+    chunks: {
       required: ["base", "react"],
-      ask: ["ci", "test", "typescript", "lint"],
+      optional: ["ci", "test", "typescript", "lint"],
     },
   },
 } as Template

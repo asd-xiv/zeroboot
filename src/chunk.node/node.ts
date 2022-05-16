@@ -2,7 +2,7 @@ import { Chunk } from "../core.types/chunk"
 
 export default {
   init: {
-    name: "CI",
+    name: "Node",
     ask: [],
   },
 } as Chunk
