@@ -1,9 +1,7 @@
 #!/bin/sh
 
-# Dont run when in CI environment.
-# For ex. when pushing changelogs via "semantic-release".
-if [ -n "$CI" ]; then
-  exit 0
-fi
+# Dont run in CI environment, for ex. when pushing version update
+# via "semantic-release".
+if [ -n "$CI" ]; then exit 0; fi
 
-cat "$1" | npx --no-install commitlint
+npx --no-install commitlint < "$1"

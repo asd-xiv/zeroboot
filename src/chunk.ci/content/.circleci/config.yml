@@ -67,7 +67,7 @@ jobs:
       - run:
           name: "[npm]: Install packages"
           command: |
-            npm run setup
+            npm run setup -- --no-setup
       - save_cache:
           paths:
             - node_modules

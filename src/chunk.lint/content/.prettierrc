@@ -11,5 +11,20 @@
   "bracketSameLine": true,
   "arrowParens": "avoid",
   "proseWrap": "always",
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^core.libs/(.*)$",
+    "^core.types/(.*)$",
+    "^core.hooks/(.*)$",
+    "^core.i18n/(.*)$",
+    "^core.ui/(.*)$",
+    "^(page.(.*)|route.(.*)|layout.(.*))/(.*)$",
+    "^(.*)test-mock(.*)$",
+    "^./data/(.*)$",
+    "^./section/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true
 }
