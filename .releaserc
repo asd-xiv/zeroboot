@@ -1,23 +1,26 @@
 {
   "branches": [
     {
-      "name": "master",
+      "name": "main",
       "tag": "latest"
-    },
-    {
-      "name": "next",
-      "prerelease": true
     }
   ],
   "plugins": [
-    "@semantic-release/commit-analyzer",
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
     "@semantic-release/release-notes-generator",
     "@semantic-release/npm",
     [
       "@semantic-release/git",
       {
-        "assets": [ "package.json", "package-lock.json" ]
+        "assets": ["package.json", "package-lock.json"],
+        "message": ":bookmark: chore(release): ${nextRelease.gitTag} [skip ci] \n\n${nextRelease.notes}"
       }
-    ]
+    ],
+    "@semantic-release/github"
   ]
 }

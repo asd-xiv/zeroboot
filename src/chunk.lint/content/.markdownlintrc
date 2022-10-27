@@ -1,7 +1,0 @@
-{
-  "line-length": 80,
-  "no-duplicate-heading": {
-    "allow_different_nesting": true
-  },
-  "no-trailing-punctuation": false
-}

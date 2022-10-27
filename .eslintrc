@@ -1,8 +1,23 @@
 {
   "root": true,
-  "extends": ["@asd14/eslint-config/targets/node-ts"],
-  "rules": {},
+  "extends": ["@asd14/eslint-config/targets/node-esm"],
+  "parserOptions": {
+    "ecmaVersion": 2022
+  },
+  "rules": {
+    "dot-notation": "off",
+    "jsdoc/no-undefined-types": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "extends": ["@asd14/eslint-config/targets/node-ts"]
+    }
+  ],
   "settings": {
+    "jsdoc": {
+      "mode": "typescript"
+    },
     "import/cache": {
       "lifetime": 5
     }

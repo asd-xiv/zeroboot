@@ -9,6 +9,7 @@
     "externalHelpers": true,
     "parser": {
       "syntax": "typescript",
+      "importMeta": true,
       "dynamicImport": true
     }
   }
