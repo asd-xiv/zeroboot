@@ -44,7 +44,7 @@
     "postupdate": "npm audit fix",
     "format": "prettier --write --prose-wrap=always .",
     "----LINT": "",
-    "lint.js": "eslint lib",
+    "lint.js": "eslint src bin",
     "lint.md": "markdownlint '*.md' 'src/**/*.md'",
     "lint": "npm run lint.js && npm run lint.md",
     "typecheck": "tsc --pretty --noEmit",
