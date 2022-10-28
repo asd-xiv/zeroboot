@@ -1,6 +1,4 @@
-/**
- * @typedef {import("../index.js").PackageJSON} PackageJSON
- */
+/** @typedef { import("./node.types.js").PackageJSON } PackageJSON */
 
 import { access, readdir, readFile } from "node:fs/promises"
 import { join, resolve } from "node:path"

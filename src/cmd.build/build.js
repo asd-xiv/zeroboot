@@ -1,6 +1,4 @@
-/**
- * @typedef { import("../index.js").Stack } Stack
- */
+/** @typedef { import("../core.types/stack.js").Stack } Stack */
 
 import { promisify } from "node:util"
 import fs from "node:fs/promises"
