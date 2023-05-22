@@ -2,9 +2,7 @@
 
 import { join } from "node:path"
 import { exec } from "node:child_process"
-
 import chalk from "chalk"
-const { cyan } = chalk
 
 import { CONFIG, SPINNER } from "../config.js"
 
@@ -70,7 +68,7 @@ export const checkIsGitRepo = path =>
  * @param {Object} props
  * @param {string} props.localPath
  *
- * @returns {Promise<void>}
+ * @returns {Promise<[string, string]>}
  */
 export const cloneOrPull = (repoPath, { localPath }) => {
   const repoLocalPath = join(localPath, repoPath)
@@ -78,7 +76,7 @@ export const cloneOrPull = (repoPath, { localPath }) => {
   return checkIsGitRepo(repoLocalPath)
     .then(isRepo => {
       SPINNER.start(
-        `${isRepo ? "Pulling" : "Cloning"} git repo: ${cyan(repoPath)}`
+        `${isRepo ? "Pulling" : "Cloning"} git repo: ${chalk.cyan(repoPath)}`
       )
 
       if (isRepo) {
@@ -89,13 +87,15 @@ export const cloneOrPull = (repoPath, { localPath }) => {
     })
     .then(() => {
       SPINNER.succeed()
+
+      return [repoPath, repoLocalPath]
     })
 }
 
 /**
  * @param {string[]} input
  *
- * @returns {Promise<void[]>}
+ * @returns {Promise<[string, string][]>}
  */
 export const cloneOrPullMany = input =>
   Promise.all(

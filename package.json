@@ -2,7 +2,7 @@
   "name": "@asd14/zeroboot",
   "version": "0.1.0",
   "description": "",
-  "license" : "BSD-3-Clause",
+  "license": "BSD-3-Clause",
   "homepage": "https://github.com/asd-xiv/zeroboot",
   "keywords": [
     "starter",

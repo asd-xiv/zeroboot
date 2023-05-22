@@ -1,10 +1,9 @@
-/** @typedef { import("./node.types.js").PackageJSON } PackageJSON */
-
 import { access, readdir, readFile } from "node:fs/promises"
 import { join, resolve } from "node:path"
 import toml from "@ltd/j-toml"
+import chalk from "chalk"
 
-const __dirname = new URL(import.meta.url).pathname
+import { SPINNER } from "../config.js"
 
 /**
  * Check if a path is a directory and is does not contain any files or
@@ -64,7 +63,12 @@ export const getNodeVersion = () => {
  * @returns {Promise<Record<string, unknown>>}
  */
 export const readFileAsTOML = path =>
-  readFile(path, "utf8").then(buffer => toml.parse(buffer.toString()))
+  readFile(path, "utf8")
+    .then(buffer => toml.parse(buffer.toString()))
+    .catch(error => {
+      SPINNER.warn(`Failed to parse TOML file: ${chalk.cyan(path)}`)
+      throw error
+    })
 
 /**
  * Read a file and parse it as JSON.
@@ -74,7 +78,20 @@ export const readFileAsTOML = path =>
  * @returns {Promise<Record<string, unknown>>}
  */
 export const readFileAsJSON = path =>
-  readFile(path, "utf8").then(buffer => JSON.parse(buffer.toString()))
+  readFile(path, "utf8")
+    .then(buffer => JSON.parse(buffer.toString()))
+    .catch(error => {
+      SPINNER.warn(`Failed to parse JSON file: ${chalk.cyan(path)}`)
+      throw error
+    })
+
+/**
+ * @typedef {Object} PackageJSON
+ *
+ * @property {string} name
+ * @property {string} description
+ * @property {string} version
+ */
 
 /**
  * Get Zeroboot package info from package.json file.
@@ -82,6 +99,7 @@ export const readFileAsJSON = path =>
  * @returns {Promise<PackageJSON>}
  */
 export const getPackageInfo = () => {
+  const __dirname = new URL(import.meta.url).pathname
   const path = join(__dirname, "..", "..", "..", "package.json")
 
   return /** @type {Promise<PackageJSON>} */ (readFileAsJSON(resolve(path)))

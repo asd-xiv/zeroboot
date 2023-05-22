@@ -1,31 +1,94 @@
 /** @typedef { import("../core.types/stack.js").Stack } Stack */
+/** @typedef { import("../core.types/deck.js").Deck } Deck */
 
-import { promisify } from "node:util"
-import fs from "node:fs/promises"
-import path from "node:path"
+import nUtil from "node:util"
+import nFs from "node:fs/promises"
+import nPath from "node:path"
 
 import ejs from "ejs"
 import inquirer from "inquirer"
 import glob from "glob"
-import { pipe, map, join, groupBy } from "rambda"
+import { pipe, map, join, groupBy, evolve, add } from "rambda"
 
 import { CONFIG } from "../config.js"
 import { cloneOrPullMany } from "../core.libs/git.js"
+import { readFileAsJSON } from "../core.libs/node.js"
 
-const globP = promisify(glob)
+const globP = nUtil.promisify(glob)
 const __dirname = new URL("../", import.meta.url).pathname
 
 /**
+ * @typedef {Object} DeckConfig
  *
- * @returns {Promise<Stack[]>}
+ * @property {string} repoAddress
+ * @property {string} localPath
+ * @property {Deck}   rc
  */
-const getStacks = () =>
+
+/**
+ * Read and parse a deck's ".zerobootrc" config file.
+ *
+ * @param {[string, string]} repoAddressLocalPathTuple
+ * @returns {Promise<DeckConfig>}
+ */
+const getDeckConfig = ([repoAddress, localPath]) =>
+  // TODO: add json schema validation
+  readFileAsJSON(nPath.join(localPath, ".zerobootrc")).then(config => ({
+    repoAddress,
+    localPath,
+    rc: /** @type {Deck} */ (config),
+  }))
+
+/**
+ * Read and parse multiple decks' config file.
+ *
+ * @param {[string, string][]} decks
+ * @returns {Promise<DeckConfig[]>}
+ */
+const getAllDecksConfigs = decks => Promise.all(map(getDeckConfig, decks))
+
+/**
+ * @typedef {Object} DeckContents
+ *
+ * @property {string[]} chunks
+ * @property {string[]} stacks
+ */
+
+evolve({
+  foo: (...asd) => console.log(asd),
+  bar: input => add(-1, input),
+})({
+  a: 1,
+  foo: 2,
+  bar: 3,
+})
+// => `result` is equal to `expected`
+
+/**
+ *
+ * @param {DeckConfig} config
+ *
+ * @returns {Promise<DeckContents>}
+ */
+const getDeckContents = config => {
+  console.log(config)
+
   globP(`${CONFIG.CACHE_PATH}/*/stack.*`).then(
     pipe(
       map(filePath => import(filePath).then(template => template.default)),
       fileTuples => Promise.all(fileTuples)
     )
   )
+}
+
+/**
+ *
+ * @param {[string, Deck][]} configs
+ *
+ * @returns {Promise<DeckContents[]>}
+ */
+const getAllDecksContents = configs =>
+  Promise.all(map(getDeckContents, configs))
 
 /**
  *
@@ -105,10 +168,10 @@ const getFilesByChunk = chunks => {
  * @returns {Promise<void>}
  */
 const renderFile = (filePath, { destinationPath }) =>
-  fs
+  nFs
     .mkdir(destinationPath, { recursive: true })
     .then(() => ejs.renderFile(filePath, {}, {}))
-    .then(compiledContent => fs.writeFile(destinationPath, compiledContent))
+    .then(compiledContent => nFs.writeFile(destinationPath, compiledContent))
 
 /**
  *
@@ -138,7 +201,7 @@ const renderFiles = (files, { destinationPath }) => {
  * @returns {Promise<void>}
  */
 const renderStack = ({ destinationPath, chunks, filesByChunk }) =>
-  fs
+  nFs
     .mkdir(destinationPath, { recursive: true })
     .then(() => {
       const chunksPromises = chunks.map(item =>
@@ -159,7 +222,16 @@ const renderStack = ({ destinationPath, chunks, filesByChunk }) =>
  */
 export const build = ({ destinationPath }) =>
   cloneOrPullMany(CONFIG.GIT_REPO_URLS)
-    .then(getStacks)
+    .then(getAllDecksConfigs)
+    .then(
+      map(
+        evolve({
+          stacks: () => {},
+          chunks: () => {},
+        })
+      )
+    )
+    .then(getAllDecksContents)
     .then(pickStack)
     .then(pluckChunks)
     .then(getFilesByChunk)

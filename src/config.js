@@ -1,9 +1,7 @@
 import path from "node:path"
 import ora from "ora"
 import { isNil, mergeDeepRight } from "rambda"
-
 import chalk from "chalk"
-const { cyan } = chalk
 
 import { readFileAsTOML } from "./core.libs/node.js"
 
@@ -27,33 +25,31 @@ export const SPINNER = ora()
  * @property {string[]} GIT_REPO_URLS
  */
 
-/** @type {Required<Config>} */
-const defaultConfig = {
-  DEBUG: false,
-
-  CACHE_PATH: path.join(
-    process.env["XDG_CACHE_HOME"] ?? path.join(process.env["HOME"], ".cache"),
-    "zeroboot"
-  ),
-
-  LOCAL_PATH: path.join(process.env["HOME"], "Zeroboot"),
-
-  GIT_REPO_URLS: ["asd-xiv/zeroboot-stacks"],
-}
-
-/** @type {Config} */
+/**
+ * Contains merged config data from ~/.config/zeroboot.toml and lib defaults
+ *
+ * @type {Config}
+ */
 export const CONFIG = mergeDeepRight(
-  defaultConfig,
+  {
+    DEBUG: process.env["DEBUG"] === "true",
+    CACHE_PATH: path.join(
+      process.env["XDG_CACHE_HOME"] ?? path.join(process.env["HOME"], ".cache"),
+      "zeroboot"
+    ),
+    LOCAL_PATH: path.join(process.env["HOME"], "Zeroboot"),
+    GIT_REPO_URLS: ["asd-xiv/zeroboot-deck"],
+  },
   await readFileAsTOML(USER_CONFIG_PATH)
     .then(data => {
-      SPINNER.info(`Loaded config from ${cyan(USER_CONFIG_PATH)}`)
+      SPINNER.info(`Loaded config from ${chalk.cyan(USER_CONFIG_PATH)}`)
 
       return data
     })
     .catch(error => {
       if (error.code === "ENOENT") {
         SPINNER.info(
-          `User config file ${cyan(
+          `User config file ${chalk.cyan(
             USER_CONFIG_PATH
           )} does not exist, using defaults`
         )

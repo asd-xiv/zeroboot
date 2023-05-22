@@ -4,7 +4,6 @@
   "compilerOptions": {
     "module": "node16",
     "moduleResolution": "node16",
-    "baseUrl": "./src",
     "sourceMap": true,
     "declaration": false,
     "allowJs": true,
