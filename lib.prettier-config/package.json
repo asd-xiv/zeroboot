@@ -1,0 +1,16 @@
+{
+  "name": "@z3r0boot/prettier-config",
+  "version": "1.0.0",
+  "description": "z3r0boot's Prettier config",
+  "author": "Andrei Dumitrescu <andrei.dumitrescu@pm.me>",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "url": "git+https://github.com/asd-xiv/zeroboot.git",
+    "directory": "packages/prettier-config"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "index.json",
+  "scripts": {}
+}

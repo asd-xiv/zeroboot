@@ -1,0 +1,25 @@
+{
+  "name": "@z3r0boot/tui",
+  "version": "1.0.0",
+  "description": "React Ink terminal UI for z3r0boot",
+  "author": {
+    "name": "Andrei Dumitrescu",
+    "url": "https://github.com/andreidmt",
+    "email": "andrei.dumitrescu@pm.me"
+  },
+  "license": "BSD-3-Clause",
+  "repository": {
+    "url": "git+https://github.com/asd-xiv/zeroboot.git",
+    "directory": "packages/tui"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src",
+    "bin"
+  ],
+  "license": "BSD-3-Clause",
+  "type": "module",
+  "scripts": {}
+}

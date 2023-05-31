@@ -1,15 +1,74 @@
 {
   "branches": [
     {
-      "name": "main",
-      "tag": "latest"
+      "name": "main"
     }
   ],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
       {
-        "preset": "conventionalcommits"
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "refactor",
+              "section": "Code Refactoring",
+              "hidden": false
+            },
+            {
+              "type": "improvement",
+              "section": "Improvement",
+              "hidden": false
+            },
+            {
+              "type": "perf",
+              "section": "Performance Improvements"
+            },
+            {
+              "type": "revert",
+              "section": "Reverts"
+            },
+            {
+              "type": "style",
+              "section": "Styles",
+              "hidden": false
+            },
+            {
+              "type": "test",
+              "section": "Tests",
+              "hidden": false
+            },
+            {
+              "type": "docs",
+              "section": "Documentation",
+              "hidden": false
+            },
+            {
+              "type": "build",
+              "section": "Build System",
+              "hidden": false
+            },
+            {
+              "type": "ci",
+              "section": "Continuous Integration",
+              "hidden": false
+            },
+            {
+              "type": "chore",
+              "section": "Miscellaneous Chores",
+              "hidden": true
+            }
+          ]
+        }
       }
     ],
     "@semantic-release/release-notes-generator",
@@ -18,7 +77,7 @@
       "@semantic-release/git",
       {
         "assets": ["package.json", "package-lock.json"],
-        "message": ":bookmark: chore(release): ${nextRelease.gitTag} [skip ci] \n\n${nextRelease.notes}"
+        "message": "chore(release): ${nextRelease.gitTag} [skip ci] \n\n${nextRelease.notes}"
       }
     ],
     "@semantic-release/github"

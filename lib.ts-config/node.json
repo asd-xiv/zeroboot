@@ -1,0 +1,9 @@
+{
+  "extends": "./common.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "nodenext",
+    "target": "esnext",
+    "esModuleInterop": true
+  }
+}

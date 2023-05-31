@@ -1,0 +1,64 @@
+{
+  "name": "@z3r0boot/core",
+  "version": "1.0.0",
+  "description": "z3r0boot's core library",
+  "author": {
+    "name": "Andrei Dumitrescu",
+    "url": "https://github.com/andreidmt",
+    "email": "andrei.dumitrescu@pm.me"
+  },
+  "license": "BSD-3-Clause",
+  "repository": {
+    "url": "git+https://github.com/asd-xiv/zeroboot.git",
+    "directory": "packages/core"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./agents": {
+      "types": "./dist/types/agents/index.d.ts",
+      "default": "./src/agents/index.js"
+    },
+    "./models": {
+      "types": "./dist/types/models/index.d.ts",
+      "default": "./src/models/index.js"
+    }
+  },
+  "scripts": {
+    "---UTIL": "",
+    "format": "eslint --fix .",
+    "update": "ncu --interactive",
+    "---CODE-ANALYSIS": "",
+    "lint:js": "eslint --quiet .",
+    "lint:md": "markdownlint '*.md' --ignore CHANGELOG.md",
+    "lint": "npm run lint:js && npm run lint:md",
+    "test:unit": "tape 'src/**/*.test.js'",
+    "typecheck": "tsc --pretty --noEmit",
+    "---BUILD": "",
+    "build": "tsc --emitDeclarationOnly --declaration --outDir dist/types",
+    "---DEV": "",
+    "predev": "rm -rf types && rm -f tsconfig.tsbuildinfo",
+    "dev": "nodemon --watch src --exec 'npm run build' --ext js,ts"
+  },
+  "dependencies": {
+    "@z3r0boot/pure-utils": "^1.0.0",
+    "chalk": "^5.2.0",
+    "debug": "^4.3.4",
+    "fast-glob": "^3.2.12",
+    "openai": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.8",
+    "tape": "^5.6.3"
+  }
+}

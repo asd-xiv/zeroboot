@@ -1,109 +1,82 @@
 {
-  "name": "@asd14/zeroboot",
+  "name": "z3r0boot",
   "version": "0.1.0",
-  "description": "",
+  "description": "AI powered zettelkasten",
   "license": "BSD-3-Clause",
+  "private": true,
+  "author": {
+    "name": "Andrei Dumitrescu",
+    "url": "https://github.com/andreidmt",
+    "email": "andrei.dumitrescu@pm.me"
+  },
   "homepage": "https://github.com/asd-xiv/zeroboot",
   "keywords": [
-    "starter",
-    "generator",
     "zettelkasten",
-    "library-stack",
-    "template"
+    "ai",
+    "llm",
+    "coding-assistant",
+    "prompt-engineering"
   ],
   "repository": {
-    "type": "git",
     "url": "git+https://github.com/asd-xiv/zeroboot.git"
   },
   "bugs": {
     "url": "https://github.com/asd-xiv/zeroboot/issues"
   },
-  "author": {
-    "name": "Andrei Dumitrescu",
-    "url": "https://github.com/andreidmt"
-  },
-  "type": "module",
-  "exports": "./src/index.js",
-  "sideEffects": false,
-  "directories": {
-    "bin": "bin",
-    "lib": "src"
-  },
-  "files": [
-    "bin",
-    "src"
+  "workspaces": [
+    "packages/*",
+    "lib.*",
+    "client.*",
+    "module.*"
   ],
-  "bin": {
-    "zeroboot": "bin/zeroboot.js"
-  },
   "scripts": {
     "----UTIL": "",
     "prepare": "git config --local core.hooksPath .githooks",
-    "setup": "npm ci --also=dev",
-    "update": "ncu --interactive",
-    "postupdate": "npm audit fix",
-    "format": "prettier --write --prose-wrap=always .",
-    "----LINT": "",
-    "lint.js": "eslint src bin",
-    "lint.md": "markdownlint '*.md' 'src/**/*.md'",
-    "lint": "npm run lint.js && npm run lint.md",
-    "typecheck": "tsc --pretty --noEmit",
-    "----TEST": "",
-    "test": "tape 'src/**/*.test.js' 'src/*.test.js' | tap-nirvana",
-    "tdd": "nodemon --watch src --exec 'npm test'",
-    "coverage": "c8 npm test && c8 report --reporter=text-lcov | coveralls",
-    "----BUILD": "",
-    "build.js": "swc src --out-dir dist --config module.type=es6",
-    "build.types": "tsc --outDir dist --project tsconfig.build-types.json",
-    "prebuild": "rm -rf dist",
-    "build": "npm run build.js",
-    "release": "semantic-release",
+    "presetup:fresh": "rm -rf .npm node_modules package-lock.json",
+    "setup:fresh": "npm i",
+    "setup": "npm ci",
+    "update": "ncu --interactive --deep",
+    "format": "eslint --fix .",
+    "list-packages": "lerna list --loglevel=error --all --long",
+    "----CODE-ANALYSIS": "",
+    "lint": "lerna run lint",
+    "typecheck": "lerna run typecheck",
+    "test:unit": "lerna run test:unit",
+    "test:e2e": "lerna run test:e2e",
     "----DEV": "",
-    "start": "swc src --watch --out-dir dist/esm --config module.type=es6"
+    "dev": "lerna run dev --stream --parallel --no-bail",
+    "----DEPLOY": "",
+    "release": "lerna version --create-release github --yes",
+    "publish": "lerna publish --no-private"
   },
-  "dependencies": {
-    "@ltd/j-toml": "^1.35.2",
-    "@swc/helpers": "^0.4.12",
-    "async": "^3.2.4",
-    "chalk": "^5.1.2",
-    "chokidar": "^3.5.3",
-    "cli-prompt": "^0.6.0",
-    "commander": "^9.4.1",
-    "ejs": "^3.1.8",
-    "glob": "^8.0.3",
-    "inquirer": "^9.1.4",
-    "micromatch": "^4.0.5",
-    "ora": "^6.1.2",
-    "rambda": "^7.3.0"
+  "lint-staged": {
+    "*.json": "prettier",
+    ".circleci/config.yml": "circleci config validate"
   },
   "devDependencies": {
-    "@asd14/eslint-config": "^8.1.0",
-    "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.1.0",
-    "@semantic-release/changelog": "^6.0.1",
+    "@commitlint/cli": "^17.6.5",
+    "@commitlint/config-conventional": "^17.6.5",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^8.0.6",
-    "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.3.11",
-    "@types/async": "^3.2.15",
-    "@types/ejs": "^3.1.1",
-    "@types/glob": "^8.0.0",
-    "@types/inquirer": "^9.0.2",
-    "@types/tape": "^4.13.2",
-    "c8": "^7.12.0",
-    "eslint": "^8.26.0",
-    "lint-staged": "^13.0.3",
-    "markdownlint-cli": "^0.32.2",
-    "npm-check-updates": "^16.3.15",
-    "prettier": "^2.7.1",
-    "semantic-release": "^19.0.5",
-    "tap-nirvana": "^1.1.0",
-    "tape": "^5.6.1",
-    "toml": "^3.0.0",
-    "typescript": "^4.8.4"
+    "@semantic-release/github": "^8.1.0",
+    "@types/node": "^20.2.5",
+    "@types/tape": "^5.6.0",
+    "@z3r0boot/eslint-config": "^1.0.0",
+    "@z3r0boot/prettier-config": "^1.0.0",
+    "@z3r0boot/ts-config": "^1.0.0",
+    "c8": "^7.14.0",
+    "eslint": "^8.41.0",
+    "jest": "^29.5.0",
+    "lerna": "^6.6.2",
+    "lint-staged": "^13.2.2",
+    "markdownlint-cli": "^0.34.0",
+    "nodemon": "^2.0.22",
+    "npm-check-updates": "^16.10.12",
+    "prettier": "^2.8.8",
+    "semantic-release": "^21.0.2",
+    "tape": "^5.6.3",
+    "typescript": "^5.0.4"
   },
   "engines": {
-    "node": ">=16",
-    "npm": ">=8"
+    "node": ">=18"
   }
 }

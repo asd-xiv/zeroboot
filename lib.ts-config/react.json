@@ -1,0 +1,12 @@
+{
+  "display": "React",
+  "extends": "./common.json",
+  "include": ["src", "webpack.config.js", "jest.config.js", "jest.setup.js"],
+  "exclude": ["**/node_modules"],
+  "compilerOptions": {
+    "jsx": "preserve",
+    "declaration": true,
+    "lib": ["dom"],
+    "types": ["node", "jest", "@testing-library/jest-dom", "@emotion/jest"]
+  }
+}
