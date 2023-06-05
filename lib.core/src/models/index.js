@@ -1,4 +1,6 @@
 export * from "./text-blocks/model.js"
+export * from "./conversations/model.js"
+export * from "./messages/model.js"
 export { buildTextBlock, createTextBlock } from "./text-blocks/create.js"
 export { createConversation } from "./conversations/create.js"
 export { createMessage } from "./messages/create.js"

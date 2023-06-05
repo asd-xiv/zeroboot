@@ -17,9 +17,10 @@ import { findOneTextBlockByPath } from "./find-one-by-path.js"
  * @param {string} input.id
  * @param {string} input.content
  * @param {string} input.description
+ * @param {string} input.type
  * @param {string} [input.file]
  * @param {string} [input.fileCWD]
- * @param {string} input.type
+ * @param {Record<string, any>} [input.meta]
  * @returns {Promise<TextBlock>}
  */
 export const buildTextBlock = ({
@@ -29,6 +30,7 @@ export const buildTextBlock = ({
   type,
   file,
   fileCWD,
+  meta = {},
 }) =>
   openaiAPI
     .createEmbedding({
@@ -46,6 +48,7 @@ export const buildTextBlock = ({
       tokens: response.data.usage.prompt_tokens,
       embeddingModel: response.data.model,
       embeddingData: response.data.data[0]?.embedding ?? [],
+      meta,
       createdAt: new Date().toISOString(),
     }))
 
@@ -58,6 +61,7 @@ export const buildTextBlock = ({
  * @param {string} input.type
  * @param {string} [input.file]
  * @param {string} [input.fileCWD]
+ * @param {Record<string, any>} [input.meta]
  * @returns {Promise<{status: "processed" | "cache-hit", item: TextBlock}>}
  */
 export const createTextBlock = async ({
@@ -66,6 +70,7 @@ export const createTextBlock = async ({
   type,
   file,
   fileCWD,
+  meta,
 }) => {
   const id = randomUUID()
   const path = join(
@@ -89,6 +94,7 @@ export const createTextBlock = async ({
     type,
     file,
     fileCWD: fileCWD ?? process.cwd(),
+    meta,
   })
   await writeJSONToFile({ path }, textBlock)
 

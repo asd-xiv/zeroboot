@@ -10,6 +10,7 @@
  * @property {number} tokens
  * @property {string} embeddingModel
  * @property {number[]} embeddingData
+ * @property {object} [meta]
  * @property {string} createdAt
  */
 
@@ -34,4 +35,15 @@ export const TextBlockSchema = {
     embeddingData: { type: "array" },
     createdAt: { type: "string" },
   },
+  required: [
+    "id",
+    "content",
+    "description",
+    "type",
+    "hash",
+    "tokens",
+    "embeddingModel",
+    "embeddingData",
+    "createdAt",
+  ],
 }

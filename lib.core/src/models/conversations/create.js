@@ -12,7 +12,7 @@ export const createConversation = async input => {
   const conversation = /** @type {Conversation} */ ({
     ...input,
     id: input.id ?? randomUUID(),
-    createdAt: new Date().toISOString(),
+    createdAt: input.createdAt ?? new Date().toISOString(),
   })
 
   await writeJSONToFile(
