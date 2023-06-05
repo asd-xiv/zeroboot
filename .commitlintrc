@@ -1,4 +1,16 @@
 {
   "extends": ["@commitlint/config-conventional"],
-  "rules": {}
+  "rules": {
+    "scope-enum": [
+      2,
+      "always",
+      [
+        "tui",
+        "cli",
+        "core",
+        "config",
+        "pure"
+      ]
+    ]
+  }
 }
