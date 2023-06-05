@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["@z3r0boot/eslint-config/targets/node"],
+  "extends": ["@z3r0boot/eslint-config/targets/react"],
   "rules": {
   }
 }

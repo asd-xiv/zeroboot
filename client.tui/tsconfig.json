@@ -1,5 +1,5 @@
 {
-  "extends": "@z3r0boot/ts-config/node",
+  "extends": "@z3r0boot/ts-config/react",
   "include": ["src", "bin"],
   "compilerOptions": {
   }
