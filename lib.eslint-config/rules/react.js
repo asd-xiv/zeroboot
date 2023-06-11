@@ -48,6 +48,9 @@ module.exports = {
     // Prevent this from being used in stateless functional components
     "react/no-this-in-sfc": "error",
 
+    // Enforces that there is no spreading for any JSX attribute
+    "react/jsx-props-no-spreading": "off",
+
     /*
      * This rule prevents comment strings (e.g. beginning with // or /*)
      * from being accidentally injected as a text node in JSX statements.
