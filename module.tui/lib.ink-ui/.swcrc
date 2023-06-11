@@ -1,0 +1,25 @@
+{
+  "minify": false,
+  "sourceMaps": true,
+  "env": {
+    "mode": "entry",
+    "coreJs": 3
+  },
+  "jsc": {
+    "externalHelpers": true,
+    "parser": {
+      "syntax": "typescript",
+      "tsx": true,
+      "importAssertions": true,
+      "dynamicImport": false
+    },
+    "experimental": {
+      "keepImportAssertions": true
+    },
+    "transform": {
+      "react": {
+        "runtime": "automatic"
+      }
+    }
+  }
+}

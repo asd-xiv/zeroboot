@@ -1,0 +1,7 @@
+{
+  "extends": "@z3r0boot/ts-config/ink",
+  "include": ["src"],
+  "exclude": ["**/node_modules", "dist"],
+  "compilerOptions": {
+  }
+}
