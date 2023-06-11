@@ -1,4 +1,7 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
-npm run typecheck
-npm run test
+branchName=$(git rev-parse --abbrev-ref HEAD)
+
+lerna run "test,typecheck,lint" --since "origin/$branchName" \
+  --concurrency 4 \
+  --include-dependents
