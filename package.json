@@ -24,10 +24,10 @@
     "url": "https://github.com/asd-xiv/zeroboot/issues"
   },
   "workspaces": [
-    "packages/*",
     "lib.*",
     "client.*",
-    "module.*"
+    "module.*/lib.*",
+    "module.*/client.*"
   ],
   "scripts": {
     "----UTIL": "",
@@ -37,15 +37,15 @@
     "setup": "npm ci",
     "update": "ncu --interactive --deep",
     "format": "eslint --fix .",
-    "list-packages": "lerna list --loglevel=error --all --long",
     "----CODE-ANALYSIS": "",
     "lint": "lerna run lint",
     "typecheck": "lerna run typecheck",
     "test:unit": "lerna run test:unit",
     "test:e2e": "lerna run test:e2e",
     "----DEV": "",
-    "dev": "lerna run dev --stream --parallel --no-bail",
+    "dev": "lerna run dev,dev:types,dev:js --stream --parallel --no-bail",
     "----DEPLOY": "",
+    "build": "lerna run build --no-bail",
     "release": "lerna version --create-release github --yes",
     "publish": "lerna publish --no-private"
   },
@@ -57,8 +57,8 @@
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^9.0.2",
-    "@types/node": "^20.2.5",
+    "@semantic-release/github": "^9.0.3",
+    "@types/node": "^20.3.0",
     "@types/tape": "^5.6.0",
     "@z3r0boot/eslint-config": "^1.0.0",
     "@z3r0boot/prettier-config": "^1.0.0",
@@ -66,13 +66,13 @@
     "c8": "^7.14.0",
     "eslint": "^8.42.0",
     "jest": "^29.5.0",
-    "lerna": "^6.6.2",
+    "lerna": "^7.0.0",
     "lint-staged": "^13.2.2",
     "markdownlint-cli": "^0.34.0",
     "nodemon": "^2.0.22",
     "npm-check-updates": "^16.10.12",
     "prettier": "^2.8.8",
-    "semantic-release": "^21.0.3",
+    "semantic-release": "^21.0.5",
     "tape": "^5.6.3",
     "typescript": "^5.1.3"
   },
