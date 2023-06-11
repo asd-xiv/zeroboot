@@ -28,9 +28,7 @@
     "format": "eslint --fix .",
     "update": "ncu --interactive",
     "----CODE-ANALYSIS": "",
-    "lint:js": "eslint --quiet .",
-    "lint:md": "markdownlint '*.md' --ignore CHANGELOG.md",
-    "lint": "npm run lint:js && npm run lint:md",
+    "lint": "eslint --quiet .",
     "typecheck": "tsc --pretty --noEmit"
   },
   "dependencies": {

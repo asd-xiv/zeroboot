@@ -29,10 +29,13 @@
     "format": "eslint --fix .",
     "update": "ncu --interactive",
     "----CODE-ANALYSIS": "",
-    "lint:js": "eslint --quiet .",
-    "lint:md": "markdownlint '*.md' --ignore CHANGELOG.md",
-    "lint": "npm run lint:js && npm run lint:md",
+    "lint": "eslint .",
     "typecheck": "tsc --pretty --noEmit"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
   },
   "dependencies": {
     "@z3r0boot/core": "^1.0.0",

@@ -2,6 +2,5 @@
   "extends": "@z3r0boot/ts-config/node",
   "include": ["src"],
   "compilerOptions": {
-    "rootDir": "src"
   }
 }

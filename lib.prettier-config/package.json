@@ -6,7 +6,7 @@
   "license": "BSD-3-Clause",
   "repository": {
     "url": "git+https://github.com/asd-xiv/zeroboot.git",
-    "directory": "packages/prettier-config"
+    "directory": "lib.prettier-config"
   },
   "publishConfig": {
     "access": "public"

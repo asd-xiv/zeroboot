@@ -10,7 +10,7 @@
   "license": "BSD-3-Clause",
   "repository": {
     "url": "git+https://github.com/asd-xiv/zeroboot.git",
-    "directory": "packages/pure-utils"
+    "directory": "lib.pure-utils"
   },
   "publishConfig": {
     "access": "public"
@@ -31,16 +31,16 @@
     "format": "eslint --fix .",
     "update": "ncu --interactive",
     "---CODE-ANALYSIS": "",
-    "lint:js": "eslint --quiet .",
-    "lint:md": "markdownlint '*.md' --ignore CHANGELOG.md",
-    "lint": "npm run lint:js && npm run lint:md",
-    "test:unit": "tape 'src/**/*.test.js'",
+    "lint": "eslint .",
+    "test": "tape 'src/**/*.test.js'",
     "typecheck": "tsc --pretty --noEmit",
     "---BUILD": "",
-    "build": "tsc --emitDeclarationOnly --declaration --outDir dist/types",
+    "clean": "rm -rf dist",
+    "build:types": "tsc --emitDeclarationOnly --declaration --outDir dist/types",
+    "prebuild": "npm run clean",
+    "build": "npm run build:types",
     "---DEV": "",
-    "predev": "rm -rf types && rm -f tsconfig.tsbuildinfo",
-    "dev": "nodemon --watch src --exec 'npm run build' --ext js,ts"
+    "dev:types": "nodemon --watch src --exec 'npm run build' --ext js,ts"
   },
   "dependencies": {
     "chalk": "^5.2.0",

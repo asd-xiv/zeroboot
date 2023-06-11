@@ -35,17 +35,21 @@
     "format": "eslint --fix .",
     "update": "ncu --interactive",
     "---CODE-ANALYSIS": "",
-    "lint:js": "eslint --quiet .",
-    "lint:md": "markdownlint '*.md' --ignore CHANGELOG.md",
-    "lint": "npm run lint:js && npm run lint:md",
-    "test:unit": "tape 'src/**/*.test.js'",
+    "lint": "eslint .",
+    "test": "tape 'src/**/*.test.js'",
     "typecheck": "tsc --pretty --noEmit",
     "---BUILD": "",
+    "clean": "rm -rf dist",
     "build:types": "tsc --emitDeclarationOnly --declaration --outDir dist/types",
-    "prebuild": "rm -rf dist",
+    "prebuild": "npm run clean",
     "build": "npm run build:types",
     "---DEV": "",
-    "dev:types": "nodemon --watch src --exec 'npm run build:types' --ext js,ts"
+    "dev": "nodemon --watch src --exec 'npm run build' --ext js,ts"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
   },
   "dependencies": {
     "@z3r0boot/pure-utils": "^1.0.0",
