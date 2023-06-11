@@ -1,4 +1,5 @@
 {
+  "display": "Z3r0boot's Node.js TypeScript Config",
   "extends": "./common.json",
   "compilerOptions": {
     "module": "esnext",

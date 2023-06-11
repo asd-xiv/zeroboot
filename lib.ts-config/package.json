@@ -1,12 +1,12 @@
 {
   "name": "@z3r0boot/ts-config",
   "version": "1.0.0",
-  "description": "z3r0boot's Typescript configs",
+  "description": "Z3r0boot's Typescript configs",
   "author": "Andrei Dumitrescu <andrei.dumitrescu@pm.me>",
   "license": "BSD-3-Clause",
   "repository": {
     "url": "git+https://github.com/asd-xiv/zeroboot.git",
-    "directory": "packages/ts-config"
+    "directory": "lib.ts-config"
   },
   "publishConfig": {
     "access": "public"

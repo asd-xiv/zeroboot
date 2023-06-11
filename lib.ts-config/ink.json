@@ -1,0 +1,14 @@
+{
+  "display": "Z3r0boot's React Ink TypeScript Config",
+  "extends": "./common.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "nodenext",
+    "target": "esnext",
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "declaration": true,
+    "lib": ["dom"],
+    "types": ["node"]
+  }
+}
