@@ -1,0 +1,53 @@
+{
+  "name": "@z3r0boot/new-lib",
+  "version": "1.0.0",
+  "description": "",
+  "author": {
+    "name": "Andrei Dumitrescu",
+    "url": "https://github.com/andreidmt",
+    "email": "andrei.dumitrescu@pm.me"
+  },
+  "license": "BSD-3-Clause",
+  "repository": {
+    "url": "git+https://github.com/asd-xiv/zeroboot.git",
+    "directory": "lib.new-lib"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./src/index.js"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "----UTIL": "",
+    "format": "eslint --fix .",
+    "update": "ncu --interactive",
+    "----CODE-ANALYSIS": "",
+    "lint:js": "eslint --quiet .",
+    "lint:md": "markdownlint '*.md' --ignore CHANGELOG.md",
+    "lint": "npm run lint:js && npm run lint:md",
+    "typecheck": "tsc --pretty --noEmit",
+    "----BUILD": "",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationMap --sourceMap --outDir dist/types",
+    "prebuild": "rm -rf dist",
+    "build": "npm run build:types",
+    "---DEV": "",
+    "dev:types": "nodemon --watch src --exec \"npm run build:types\" --ext ts,tsx"
+  },
+  "dependencies": {
+    "@swc/helpers": "^0.5.1",
+    "@z3r0boot/pure-utils": "^1.0.0"
+  },
+  "peerDependencies": {
+  },
+  "devDependencies": {
+  }
+}
