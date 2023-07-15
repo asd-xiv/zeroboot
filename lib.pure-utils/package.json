@@ -43,13 +43,13 @@
     "dev:types": "nodemon --watch src --exec 'npm run build' --ext js,ts"
   },
   "dependencies": {
-    "chalk": "^5.2.0",
-    "fast-glob": "^3.2.12"
+    "chalk": "^5.3.0",
+    "fast-glob": "^3.3.0"
   },
   "peerDependencies": {
     "openai": "^3.2.1"
   },
   "devDependencies": {
-    "tape": "^5.6.3"
+    "tape": "^5.6.5"
   }
 }
