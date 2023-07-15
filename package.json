@@ -24,14 +24,10 @@
     "url": "https://github.com/asd-xiv/zeroboot/issues"
   },
   "workspaces": [
-    "libs/*",
-    "clients/*",
-    "lib.*",
-    "client.*",
-    "module.*/libs/*",
-    "module.*/clients/*",
-    "module.*/lib.*",
-    "module.*/client.*"
+    "packages/libs/*",
+    "packages/clients/*",
+    "packages/module.*/libs/*",
+    "packages/module.*/clients/*"
   ],
   "scripts": {
     "----UTIL": "",

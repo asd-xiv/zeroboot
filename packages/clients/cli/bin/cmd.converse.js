@@ -115,6 +115,18 @@ const restartConversation = async conversation => {
   messages.forEach(message => echoMessage(message))
 }
 
+const askUserToPickModel = async () => {
+  const { model } = await inquirer.prompt({
+    type: "list",
+    name: "model",
+    message: "Choose an AI model:",
+    choices: await getOpenAIModels(),
+    default: "gpt-3.5-turbo",
+  })
+
+  return model
+}
+
 /**
  * @returns {Promise<void>}
  */
@@ -133,17 +145,11 @@ export const converse = async () => {
     default: "New conversation",
   })
 
-  const { model } = await inquirer.prompt({
-    type: "list",
-    name: "model",
-    message: "Choose an AI model:",
-    choices: await getOpenAIModels(),
-    default: "gpt-3.5-turbo",
-  })
-
   const conversation =
     conversationId === "Start a new conversation"
-      ? await createConversation({ model })
+      ? await createConversation({
+        model: await askUserToPickModel(),
+      })
       : await getOneConversation(conversationId)
 
   restartConversation(conversation)
