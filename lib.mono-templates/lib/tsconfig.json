@@ -1,7 +1,0 @@
-{
-  "extends": "@z3r0boot/ts-config/node",
-  "include": ["src"],
-  "exclude": ["**/node_modules", "dist"],
-  "compilerOptions": {
-  }
-}
