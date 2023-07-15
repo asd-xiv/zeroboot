@@ -1,10 +1,11 @@
-import { Text, TextProps } from "ink"
+import { Box, BoxProps, Text, TextProps } from "ink"
 
 import { FCWithChildren } from "../../types/react.js"
 
-type HeaderProps = {
+export type HeaderProps = {
   level: 1 | 2 | 3 | 4 | 5 | 6
-} & TextProps
+  color?: TextProps["color"]
+} & BoxProps
 
 export const Header: FCWithChildren<HeaderProps> = ({
   children,
@@ -13,8 +14,10 @@ export const Header: FCWithChildren<HeaderProps> = ({
   ...rest
 }) => {
   return (
-    <Text bold={true} color={color} {...rest}>
-      {Array.from({ length: level }).fill("#").join("")} {children}
-    </Text>
+    <Box {...rest}>
+      <Text bold={true} color={color}>
+        {Array.from({ length: level }).fill("#").join("")} {children}
+      </Text>
+    </Box>
   )
 }

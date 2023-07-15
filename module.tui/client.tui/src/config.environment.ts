@@ -8,12 +8,23 @@ dotenvExpand.expand(
   })
 )
 
-const DEFAULTS: Array<[string, string]> = [
-  ["ZB_HOME", ".z3r0boot"],
-  ["ZB_IGNORE_FILE", ".gitignore"],
-  ["ZB_DATABASE_HOME", join(".z3r0boot", "db")],
-]
+const DEFAULTS = {
+  ZB_HOME: ".z3r0boot",
+  ZB_IGNORE_FILE: ".gitignore",
+  ZB_DATABASE_HOME: join(".z3r0boot", "db"),
+  ZB_STATE_HOME: join(".z3r0boot", "state"),
+} as const
 
-DEFAULTS.forEach(([key, value]) => {
+Object.entries(DEFAULTS).forEach(([key, value]) => {
   process.env[key] = process.env[key] ?? value
 })
+
+export const getEnvironmentVariable = (key: keyof typeof DEFAULTS): string => {
+  const value = process.env[key]
+
+  if (value === undefined) {
+    throw new Error(`Missing environment variable: ${key}`)
+  }
+
+  return value
+}

@@ -1,6 +1,7 @@
-import { Text, Box as InkBox, BoxProps as InkBoxProps } from "ink"
+import { Box as InkBox, BoxProps as InkBoxProps } from "ink"
 
 import { FCWithChildren } from "../../types/react.js"
+import { Header } from "../index.js"
 
 export type BoxProps = {
   title?: string
@@ -9,11 +10,12 @@ export type BoxProps = {
 
 export const Box: FCWithChildren<BoxProps> = ({
   title,
+  height,
   isFocused,
   children,
-  ...restProps
+  ...rest
 }) => {
-  const borderStyle = "round" // isFocused ? restProps.borderStyle ?? "round" : undefined
+  const borderStyle = rest.borderStyle ?? "round"
   const borderColour = isFocused ? "yellowBright" : undefined
   const padding = borderStyle ? 0 : 1
 
@@ -22,14 +24,13 @@ export const Box: FCWithChildren<BoxProps> = ({
       borderStyle={borderStyle}
       borderColor={borderColour}
       padding={padding}
-      width="100%"
+      height={borderStyle && typeof height === "number" ? height + 2 : height}
       flexDirection="column"
-      overflow="hidden"
-      {...restProps}>
+      {...rest}>
       {title && isFocused && (
-        <InkBox marginTop={isFocused ? -1 : 0} height={1} overflow="hidden">
-          <Text color="yellowBright">{`[ ${title} ]`}</Text>
-        </InkBox>
+        <Header marginTop={borderStyle ? -1 : 0} level={2}>
+          {title}
+        </Header>
       )}
       {children}
     </InkBox>

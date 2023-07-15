@@ -5,7 +5,7 @@ export const useMessages = () => {
   const context = useContext(messagesContext)
 
   if (context === undefined) {
-    throw new Error("useMessages must be used within a ConversationsProvider")
+    throw new Error("useMessages must be used within a MessagesProvider")
   }
 
   return context

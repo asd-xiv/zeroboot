@@ -1,50 +1,39 @@
 import chalk from "chalk"
-import { Text, useFocus, useInput } from "ink"
-import { useState, useEffect, useId } from "react"
-
-import { useInputManager } from "../../hooks/use-input-manager/use-input-manager.js"
+import { Text, useInput } from "ink"
+import { useState, useEffect } from "react"
 import { FCWithChildren } from "../../types/react.js"
 
-export type Props = {
-  id?: string
-  value: string
+export type InputTextProps = {
   placeholder?: string
+  isFocused?: boolean // eslint-disable-line react/boolean-prop-naming
   mask?: string
-  shouldShowCursor?: boolean
-  shouldHighlightPastedText?: boolean
+  showCursor?: boolean // eslint-disable-line react/boolean-prop-naming
+  highlightPastedText?: boolean // eslint-disable-line react/boolean-prop-naming
+  value: string
   onChange: (value: string) => void
-  onSubmit?: (value: string) => void
+  onSubmit: (value: string) => void
 }
 
-export const InputText: FCWithChildren<Props> = ({
-  id,
+export const InputText: FCWithChildren<InputTextProps> = ({
   value: originalValue,
   placeholder = "",
-  mask,
-  shouldHighlightPastedText = false,
-  shouldShowCursor = true,
+  isFocused = true,
+  mask = "",
+  highlightPastedText = false,
+  showCursor = true,
   onChange,
   onSubmit,
-}) => {
-  const autoId = useId()
-  const inputId = id ?? autoId
-  const { activeInputId, setActiveInputId } = useInputManager()
-  const { isFocused } = useFocus({ id: inputId })
-
-  useEffect(() => {
-    if (isFocused && inputId !== activeInputId) {
-      setActiveInputId(inputId)
-    }
-  }, [id, inputId, activeInputId, isFocused, setActiveInputId])
-
-  const [{ cursorOffset, cursorWidth }, setState] = useState({
+}: InputTextProps) => {
+  const [state, setState] = useState({
     cursorOffset: (originalValue || "").length,
     cursorWidth: 0,
   })
 
+  const { cursorOffset, cursorWidth } = state
+
   useEffect(() => {
     setState(previousState => {
-      if (!isFocused || !shouldShowCursor) {
+      if (!isFocused || !showCursor) {
         return previousState
       }
 
@@ -59,16 +48,16 @@ export const InputText: FCWithChildren<Props> = ({
 
       return previousState
     })
-  }, [originalValue, isFocused, shouldShowCursor])
+  }, [originalValue, isFocused, showCursor])
 
-  const cursorActualWidth = shouldHighlightPastedText ? cursorWidth : 0
+  const cursorActualWidth = highlightPastedText ? cursorWidth : 0
 
   const value = mask ? mask.repeat(originalValue.length) : originalValue
   let renderedValue = value
   let renderedPlaceholder = placeholder ? chalk.grey(placeholder) : undefined
 
   // Fake mouse cursor, because it's too inconvenient to deal with actual cursor and ansi escapes
-  if (shouldShowCursor && isFocused) {
+  if (showCursor && isFocused) {
     renderedPlaceholder =
       placeholder.length === 0
         ? chalk.inverse(" ")
@@ -117,11 +106,11 @@ export const InputText: FCWithChildren<Props> = ({
       let nextCursorWidth = 0
 
       if (key.leftArrow) {
-        if (shouldShowCursor) {
+        if (showCursor) {
           nextCursorOffset -= 1
         }
       } else if (key.rightArrow) {
-        if (shouldShowCursor) {
+        if (showCursor) {
           nextCursorOffset += 1
         }
       } else if (key.backspace || key.delete) {
@@ -162,9 +151,7 @@ export const InputText: FCWithChildren<Props> = ({
         onChange(nextValue)
       }
     },
-    {
-      isActive: inputId === activeInputId,
-    }
+    { isActive: isFocused }
   )
 
   return (
