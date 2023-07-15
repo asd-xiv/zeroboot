@@ -8,5 +8,5 @@ packageLockChanged=$(\
 )
 
 if [ "$packageLockChanged" != "0" ]; then
-  npm install --no-audit --progress=false
+  npm ci --progress=false
 fi
