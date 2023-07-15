@@ -3,6 +3,7 @@
 import { randomUUID } from "node:crypto"
 import { join } from "node:path"
 import { getEnvironmentVariable, writeJSONToFile } from "@z3r0boot/pure-utils"
+import { updateConversation } from "../conversations/update.js"
 
 /**
  * Create a Message and return it's content
@@ -15,6 +16,10 @@ export const createMessage = async input => {
     ...input,
     createdAt: new Date().toISOString(),
   }
+
+  await updateConversation(message.conversationId, {
+    updatedAt: message.createdAt,
+  })
 
   await writeJSONToFile(
     {

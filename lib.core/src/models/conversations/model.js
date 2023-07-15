@@ -5,6 +5,7 @@
  * @property {string} [topic]
  * @property {string} [identity]
  * @property {string} [createdAt]
+ * @property {string} [updatedAt]
  */
 
 export const ConversationSchema = {
@@ -17,6 +18,7 @@ export const ConversationSchema = {
     topic: { type: "string" },
     identity: { type: "string" },
     createdAt: { type: "string" },
+    updatedAt: { type: "string" },
   },
   required: ["id", "model"],
   additionalProperties: false,

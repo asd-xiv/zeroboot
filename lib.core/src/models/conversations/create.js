@@ -9,10 +9,12 @@ import { writeJSONToFile, getEnvironmentVariable } from "@z3r0boot/pure-utils"
  * @returns {Promise<Conversation>}
  */
 export const createConversation = async input => {
+  const now = new Date().toISOString()
   const conversation = /** @type {Conversation} */ ({
     ...input,
     id: input.id ?? randomUUID(),
-    createdAt: input.createdAt ?? new Date().toISOString(),
+    createdAt: input.createdAt ?? now,
+    updatedAt: input.updatedAt ?? now,
   })
 
   await writeJSONToFile(

@@ -44,7 +44,7 @@
     "prebuild": "npm run clean",
     "build": "npm run build:types",
     "---DEV": "",
-    "dev": "nodemon --watch src --exec 'npm run build' --ext js,ts"
+    "dev:types": "nodemon --watch src --exec 'npm run build:types' --ext js,ts"
   },
   "lint-staged": {
     "*.js": [
@@ -53,13 +53,13 @@
   },
   "dependencies": {
     "@z3r0boot/pure-utils": "^1.0.0",
-    "chalk": "^5.2.0",
+    "chalk": "^5.3.0",
     "debug": "^4.3.4",
-    "fast-glob": "^3.2.12",
-    "openai": "^3.2.1"
+    "fast-glob": "^3.3.0",
+    "openai": "^3.3.0"
   },
   "devDependencies": {
     "@types/debug": "^4.1.8",
-    "tape": "^5.6.3"
+    "tape": "^5.6.5"
   }
 }

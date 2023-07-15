@@ -24,7 +24,11 @@ export const updateConversation = async (id, data) => {
         conversation.id
       ),
     },
-    { ...conversation, ...data }
+    {
+      ...conversation,
+      ...data,
+      updatedAt: new Date().toISOString(),
+    }
   )
 
   return conversation

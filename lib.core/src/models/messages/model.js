@@ -3,7 +3,7 @@
 /**
  * @typedef {object} Message
  * @property {string} id
- * @property {string} [conversationId]
+ * @property {string} conversationId
  * @property {ChatMessage["role"]} role
  * @property {string} content
  * @property {string} createdAt
