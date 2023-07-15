@@ -1,0 +1,5 @@
+{
+  "root": true,
+  "extends": ["@z3r0boot/eslint-config/targets/ink"],
+  "rules": {}
+}
